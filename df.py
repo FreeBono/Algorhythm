@@ -1,24 +1,26 @@
 import sys
 sys.stdin = open('input.txt')
-dp = [0]*(50)
+
 n = int(input())
+dp = [0]*(100001)
+for k in range(100001):
+    dp[k] = k
 
-for i in range(n):
-    dp[i] = i
 
-print(dp)
+dp[1] = 1
 
-for i in range(2,n):
+for i in range(2,100001):
     j = 1
 
     while j**2 <= i:
+        a = dp[j ** 2]
+        b = dp[i-(j**2)]
+        dp[i] = min(dp[i-j**2]+1,dp[i])
 
-        a = dp[i]
-        b = dp[i-j**2]+dp[j**2]
-        dp[i] = min(dp[i],dp[i-j**2]+dp[j**2])
         j += 1
 
-print(dp)
+
+print(dp[n])
 
 
 
